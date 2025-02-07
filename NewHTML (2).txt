@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-align: center;
+            background-color: #ff007f;
+            color: #d10056;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        #container {
+            position: relative;
+            margin-top: 50px;
+        }
+
+        img {
+    width: 80px; /* Further reduce image size */
+    height: auto;
+    display: block;
+    margin: 10px auto; /* Center the image above buttons/text */
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+        #buttons {
+            margin-top: 20px;
+            position: relative;
+            z-index: 1000;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        #yesBtn {
+            background-color: #ff4081;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #cccccc;
+            position: absolute;
+            z-index: 1000;
+        }
+
+        #finalMessage {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Modal -->
+    <div id="passwordModal">
+        <h1>Enter Password to Continue</h1>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+        <p id="passwordError"></p>
+    </div>
+
+    <!-- Main Content -->
+    <div id="container" style="display: none;">
+        <h1>Will you be my Valentine? 😝</h1>
+        <img src="first-image.jpg" id="mainImage">
+        <div id="buttons">
+            <button id="yesBtn" onclick="acceptLove()">Yes ❤️</button>
+            <button id="noBtn" onmousemove="avoidNo()">No 😔</button>
+        </div>
+    </div>
+
+    <div id="finalMessage" style="display: none; text-align: center;">
+        <h1>LETS GO FROM GETTING REJECTED TO BEING UR VALENTINE I LOVE YOU ❤️</h1>
+        <img src="second-image.jpg">
+    </div>
+
+    <!-- Spotify Player -->
+    <div id="spotifyPlayer">
+        <iframe style="border-radius:12px" 
+                src="https://open.spotify.com/embed/track/7s5VQqrjBtrBgZL4pEa46S?utm_source=generator" 
+                width="100%" height="352" 
+                frameBorder="0" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+        </iframe>
+
+        <!-- Lyrics Display -->
+        <div id="lyrics-container">
+            <div class="lyrics-line">"She's a killer"</div>
+            <div class="lyrics-line">"Looking at ya"</div>
+            <div class="lyrics-line">"She's my type"</div>
+            <div class="lyrics-line">"Very nice to meet ya"</div>
+        </div>
+    </div>
+
+    <!-- Floating Hearts -->
+    <div id="hearts-container"></div>
+
+    <script>
+        const PASSWORD = "marwanisthebest";
+
+        function checkPassword() {
+            const input = document.getElementById("passwordInput").value;
+            const error = document.getElementById("passwordError");
+
+            if (input === PASSWORD) {
+                document.getElementById("passwordModal").style.display = "none";
+                document.getElementById("container").style.display = "block";
+                document.body.style.overflow = "auto";
+            } else {
+                error.textContent = "Incorrect password. Try again!";
+            }
+        }
+
+        function acceptLove() {
+            document.getElementById('container').style.display = 'none';
+            document.getElementById('finalMessage').style.display = 'block';
+        }
+
+        function avoidNo() {
+            let noBtn = document.getElementById("noBtn");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.position = "absolute";
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+            noBtn.style.zIndex = 1000; 
+        }
+
+        let lyrics = document.querySelectorAll(".lyrics-line");
+        let index = 0;
+
+        function scrollLyrics() {
+            lyrics.forEach(line => line.classList.remove("active"));
+            let currentIndex = index % lyrics.length;
+            lyrics[currentIndex].classList.add("active");
+            index = (index + 1) % lyrics.length;
+        }
+
+        setInterval(scrollLyrics, 3000);
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDuration = `${3 + Math.random() * 5}s`;
+            document.getElementById("hearts-container").appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 8000);
+        }
+
+        setInterval(createHeart, 500);
+    </script>
+
+</body>
+</html>
