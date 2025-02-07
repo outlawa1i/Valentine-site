@@ -1,0 +1,77 @@
+<p><!DOCTYPE html> <html lang=&quot;en&quot;> <head>  <meta charset=&quot;UTF-8&quot;>  <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>  <title>Be My Valentine?</title>  <style>  @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&amp;display=swap');</p>
+
+<p> body {  font-family: -apple-system, BlinkMacSystemFont, &quot;SF Pro Display&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;  text-align: center;  background-color: #ff007f; /* Hotter pink background */  color: #d10056;  overflow: hidden;  margin: 0;  }</p>
+
+<p> #container {  position: relative;  margin-top: 50px;  }</p>
+
+<p> img {  width: 60%;  border-radius: 15px;  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);  }</p>
+
+<p> #buttons {  margin-top: 20px;  position: relative;  z-index: 1000;  }</p>
+
+<p> button {  padding: 10px 20px;  font-size: 18px;  border: none;  cursor: pointer;  border-radius: 10px;  position: relative;  }</p>
+
+<p> #yesBtn {  background-color: #ff4081;  color: white;  }</p>
+
+<p> #noBtn {  background-color: #cccccc;  position: absolute;  z-index: 1000;  }</p>
+
+<p> #finalMessage {  display: none;  }</p>
+
+<p> /* Password Modal Styling */  #passwordModal {  position: fixed;  top: 0;  left: 0;  width: 100%;  height: 100%;  background-color: rgba(0, 0, 0, 0.8);  display: flex;  justify-content: center;  align-items: center;  color: white;  z-index: 2000;  flex-direction: column;  }</p>
+
+<p> #passwordModal input {  padding: 10px;  font-size: 16px;  margin-bottom: 10px;  border: none;  border-radius: 5px;  outline: none;  }</p>
+
+<p> #passwordModal button {  padding: 10px 20px;  font-size: 16px;  background-color: #ff4081;  color: white;  border: none;  border-radius: 5px;  cursor: pointer;  }</p>
+
+<p> #passwordError {  color: red;  margin-top: 10px;  }</p>
+
+<p> /* Spotify Embed Styling */  #spotifyPlayer {  margin: 20px auto;  max-width: 90%;  position: relative;  border-radius: 12px;  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);  }</p>
+
+<p> /* Lyrics Container Styling */  #lyrics-container {  position: absolute;  bottom: 25px;  left: 50%;  transform: translateX(-50%);  background: linear-gradient(135deg, rgba(162, 123, 206, 0.8), rgba(123, 104, 238, 0.8));  color: white;  padding: 10px;  border-radius: 10px;  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);  text-align: center;  font-size: 14px;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, &quot;SF Pro Display&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;  overflow: hidden;  display: flex;  flex-direction: column;  justify-content: center;  backdrop-filter: blur(8px);  z-index: 5;  width: auto;  white-space: nowrap;  }</p>
+
+<p> .lyrics-line {  opacity: 0.3;  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;  padding: 3px 0;  }</p>
+
+<p> .lyrics-line.active {  opacity: 1;  font-size: 16px;  color: #fff;  transform: translateX(3px);  }</p>
+
+<p> /* Heart Animation */  .heart {  position: absolute;  width: 100px;  height: 90px;  background-color: #ff4081;  transform: rotate(-45deg);  animation: floatUp 6s infinite;  opacity: 1;  }</p>
+
+<p> .heart::before,  .heart::after {  content: &quot;&quot;;  position: absolute;  width: 100px;  height: 100px;  background-color: #ff4081;  border-radius: 50%;  }</p>
+
+<p> .heart::before {  top: -50px;  left: 0;  }</p>
+
+<p> .heart::after {  left: 50px;  top: 0;  }</p>
+
+<p> @keyframes floatUp {  0% {  transform: translateY(100vh) rotate(-45deg) scale(1);  opacity: 1;  }  50% {  opacity: 1;  }  100% {  transform: translateY(-10%) rotate(-45deg) scale(0.5);  opacity: 1;  }  }  </style> </head> <body></p>
+
+<p> <!-- Password Modal -->  <div id=&quot;passwordModal&quot;>  <h1>Enter Password to Continue</h1>  <input type=&quot;password&quot; id=&quot;passwordInput&quot; placeholder=&quot;Enter password&quot;>  <button onclick=&quot;checkPassword()&quot;>Submit</button>  <p id=&quot;passwordError&quot;></p>  </div></p>
+
+<p> <!-- Main Content -->  <div id=&quot;container&quot; style=&quot;display: none;&quot;>  <h1>Will you be my Valentine? &#55357;&#56861;</h1>  <img src=&quot;first-image.jpg&quot; id=&quot;mainImage&quot;>  <div id=&quot;buttons&quot;>  <button id=&quot;yesBtn&quot; onclick=&quot;acceptLove()&quot;>Yes &#10084;&#65039;</button>  <button id=&quot;noBtn&quot; onmousemove=&quot;avoidNo()&quot;>No &#55357;&#56852;</button>  </div>  </div></p>
+
+<p> <div id=&quot;finalMessage&quot;>  <h1>LETS GO FROM GETTING REJECTED TO BEING UR VALENTINE I LOVE YOU &#10084;&#65039;</h1>  <img src=&quot;second-image.jpg&quot;>  </div></p>
+
+<p> <!-- Spotify Player -->  <div id=&quot;spotifyPlayer&quot;>  <iframe style=&quot;border-radius:12px&quot;   src=&quot;https://open.spotify.com/embed/track/7s5VQqrjBtrBgZL4pEa46S?utm_source=generator&quot;   width=&quot;100%&quot; height=&quot;352&quot;   frameBorder=&quot;0&quot;   allowfullscreen=&quot;&quot;   allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;   loading=&quot;lazy&quot;>  </iframe></p>
+
+<p> <!-- Lyrics Display -->  <div id=&quot;lyrics-container&quot;>  <div class=&quot;lyrics-line&quot;>&quot;She's a killer&quot;</div>  <div class=&quot;lyrics-line&quot;>&quot;Looking at ya&quot;</div>  <div class=&quot;lyrics-line&quot;>&quot;She's my type&quot;</div>  <div class=&quot;lyrics-line&quot;>&quot;Very nice to meet ya&quot;</div>  </div>  </div></p>
+
+<p> <!-- Floating Hearts -->  <div id=&quot;hearts-container&quot;></div></p>
+
+<p> <script>  const PASSWORD = &quot;marwanisthebest&quot;;</p>
+
+<p> function checkPassword() {  const input = document.getElementById(&quot;passwordInput&quot;).value;  const error = document.getElementById(&quot;passwordError&quot;);</p>
+
+<p> if (input === PASSWORD) {  document.getElementById(&quot;passwordModal&quot;).style.display = &quot;none&quot;;  document.getElementById(&quot;container&quot;).style.display = &quot;block&quot;;  document.body.style.overflow = &quot;auto&quot;;  } else {  error.textContent = &quot;Incorrect password. Try again!&quot;;  }  }</p>
+
+<p> function acceptLove() {  document.getElementById('container').style.display = 'none';  document.getElementById('finalMessage').style.display = 'block';  }</p>
+
+<p> function avoidNo() {  let noBtn = document.getElementById(&quot;noBtn&quot;);  let x = Math.random() * (window.innerWidth - 100);  let y = Math.random() * (window.innerHeight - 50);  noBtn.style.position = &quot;absolute&quot;;  noBtn.style.left = &#96;${x}px&#96;;  noBtn.style.top = &#96;${y}px&#96;;  noBtn.style.zIndex = 1000; // Ensures it stays on top  }</p>
+
+<p> // Auto-scroll lyrics effect like iOS Spotify (Only 1 line at a time)  let lyrics = document.querySelectorAll(&quot;.lyrics-line&quot;);  let index = 0;</p>
+
+<p> function scrollLyrics() {  lyrics.forEach(line => line.classList.remove(&quot;active&quot;));    for (let i = 0; i < 1; i++) {  let currentIndex = (index + i) % lyrics.length;  lyrics[currentIndex].classList.add(&quot;active&quot;);  }    index = (index + 1) % lyrics.length;  }</p>
+
+<p> setInterval(scrollLyrics, 3000); // Change lyrics every 3 seconds</p>
+
+<p> // Generate Floating Hearts  function createHeart() {  const heart = document.createElement(&quot;div&quot;);  heart.classList.add(&quot;heart&quot;);  heart.style.left = &#96;${Math.random() * 100}vw&#96;;  heart.style.animationDuration = &#96;${3 + Math.random() * 5}s&#96;;  document.getElementById(&quot;hearts-container&quot;).appendChild(heart);    setTimeout(() => {  heart.remove();  }, 8000); // Remove hearts after animation ends  }</p>
+
+<p> setInterval(createHeart, 500); // Create hearts every 500ms  </script></p>
+
+<p></body> </html></p>
